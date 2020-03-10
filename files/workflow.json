@@ -1,0 +1,47 @@
+{
+	"proprietor"	: "cc406",
+	"description"	: "Text Analysis Workflow",
+	
+	"jobs"		: [
+		{	"jid"			: "tawLoad.R",
+			"activationSet"	: [ { 	"path"		: 	"/mysrc/taw/bin",
+									"options"	: 	"null" } ],
+			"successors"	: [ { "jid"		: 	"tawToLowerCaseFilter.R"} ],
+			"predecessors"	: [ { "jid"		: 	"null"} ],
+			"in"			: [ { "fileName"	:	"datos.json",
+								  "path"		:	"/mysrc/taw/in"} ],
+			"out"			: [ { "fileName"	:	"bitacora1.txt",
+								"path"			:	"/mysrc/taw/out"} ]
+		},
+		{	"jid"			: "tawToLowerCaseFilter.R",
+			"activationSet"	: [ {	"path"		: 	"/mysrc/taw/bin",
+									"options"	: 	"null"} ],
+			"successors"	: [ {"jid"		: 	"tawStripWhiteSpaceFilter.R"} ],
+			"predecessors"	: [ {"jid"		: 	"tawLoad.R"} ],
+			"in"			: [ {"fileName"	:	"bitacora1.txt",
+								"path"		:	"/mysrc/taw/in"} ],
+			"out"			: [ {"fileName"	:	"bitacora2.txt",
+								"path"		:	"/mysrc/taw/out"} ]
+		},
+		{	"jid"			: "tawStripWhiteSpaceFilter.R",
+			"activationSet"	: [ {"path"		: 	"/mysrc/taw/bin",
+								"options"	: 	"null"} ],
+			"successors"	: [ {"jid"		: 	"tawStopWordFilter.R"} ],
+			"predecessors"	: [ {"jid"		: 	"tawToLowerCaseFilter.R"} ],
+			"in"			: [ {"fileName"	:	"bitacora2.txt",
+								"path"		:	"/mysrc/taw/in"} ],
+			"out"			: [ {"fileName"	:	"bitacora3.txt",
+								"path"		:	"/mysrc/taw/out"} ]
+		},
+		{	"jid"			: "tawStopWordFilter.R",
+			"activationSet"	: [ {"path"		: 	"/mysrc/taw/bin",
+								"options"	: 	"null"} ],
+			"successors"	: [ {"jid"		: 	"null"} ],
+			"predecessors"	: [ {"jid"		: 	"tawStripWhiteSpaceFilter.R"} ],
+			"in"			: [ {"fileName"	:	"bitacora3.txt",
+								"path"		:	"/mysrc/taw/in"} ],
+			"out"			: [ {"fileName"	:	"datosFiltrados.txt",
+								"path"		:	"/mysrc/taw/out"} ]
+		}
+	]
+}
