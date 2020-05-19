@@ -30,7 +30,7 @@ public class GridInfBroker {
 	/**
 	 * The buffer limit
 	 */
-	private  final static int MAX_BUFFER_CAPACITY = 10;
+	private  final static int MAX_BUFFER_CAPACITY = 2; // 10;
 	
 	
 	/**
@@ -61,7 +61,7 @@ public class GridInfBroker {
 		this.commEndPointQueue = new LinkedList<Socket>();
 	
 		try {
-			fh = new FileHandler("C:\\Users\\ahiralesc\\Documents\\mysrc\\java_codes\\InformationBroker\\files\\MyLogFile.log", true);
+			fh = new FileHandler("C:\\Users\\ahiralesc\\Mysrc\\java_codes\\flows\\files\\MyLogFile.log", true);
 			logger.addHandler(fh);
 			logger.setLevel(Level.ALL);
 			SimpleFormatter formatter = new SimpleFormatter();
@@ -126,10 +126,12 @@ public class GridInfBroker {
 			 * - when the 
 			 *  
 			 */
-			ServerSocket serverSock = new ServerSocket(4242);
-			
+			ServerSocket serverSock = new ServerSocket(49153);
+			System.out.println("Server ready and listening");
 			while(true) {
 				Socket sock = serverSock.accept();
+				System.out.println("Server accepted a connection");
+				
 				// Add it to the client connection queue
 				this.commEndPointQueue.add(sock);
 				// Check if we have reached the maximum buffer capacity

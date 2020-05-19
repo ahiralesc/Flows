@@ -54,7 +54,7 @@ public class ProactiveInstr {
 				// Get host state information
 				System.out.println("Trying to send " + dateFormat.format(new Date()).toString() + " # " + state.toString());
 				
-				Socket clientSock = new Socket("127.0.0.1", 4242);
+				Socket clientSock = new Socket("127.0.0.1", 49153);
 				OutputStreamWriter streamWriter = new OutputStreamWriter(clientSock.getOutputStream());
 				BufferedWriter writer = new BufferedWriter(streamWriter);
 				
